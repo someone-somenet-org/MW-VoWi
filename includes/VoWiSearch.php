@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class_alias(SearchEngineFactory::getSearchEngineClass(wfGetDB(DB_REPLICA)), 'DatabaseSearch');
 
 class VoWiSearch extends DatabaseSearch {
@@ -14,7 +16,6 @@ class VoWiTitlePrefixSearch extends TitlePrefixSearch {
 	// The code of this function was initially copied from PrefixSearch::defaultSearchBackend().
 
 	public function defaultSearchBackend( $namespaces, $search, $limit, $offset ) {
-		global $wgContLang;
 		global $wgOutdatedLVACategory;
 		global $wgUniNamespaces;
 		// Backwards compatability with old code. Default to NS_MAIN if no namespaces provided.
@@ -25,7 +26,7 @@ class VoWiTitlePrefixSearch extends TitlePrefixSearch {
 			$namespaces[] = NS_MAIN;
 		}
 
-		$prefix = $wgContLang->caseFold( $search );
+		$prefix = MediaWikiServices::getInstance()->getContentLanguage()->caseFold( $search );
 		$dbr = wfGetDB( DB_REPLICA );
 		$conds = [];
 

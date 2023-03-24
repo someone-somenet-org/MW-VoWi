@@ -47,7 +47,7 @@ class SpecialAddLVA extends IncludableSpecialPage {
 	function submit($data){
 		foreach (self::INVALID_CHARS as $char)
 			if (strpos($data['Name'].$data['Teachers'], $char) !== FALSE)
-				return wfMessage('addlva-invalidchars', implode(self::INVALID_CHARS,', '));
+				return wfMessage('addlva-invalidchars', implode(', ', self::INVALID_CHARS));
 		$title = Title::newFromText("$data[Namespace]:$data[Name] $data[Type] ($data[Teachers])");
 		if ($title == null)
 			return wfMessage('invalidtitle');

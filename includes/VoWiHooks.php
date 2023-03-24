@@ -89,7 +89,7 @@ $args
 	}
 
 	public static function renderAbbreviation( Parser $parser, $abbr) {
-		$parser->getOutput()->setProperty("abbreviation", strtolower($abbr));
+		$parser->getOutput()->setPageProperty("abbreviation", strtolower($abbr));
 	}
 
 	public static function renderSearchInput( $input, $args, $parser) {
